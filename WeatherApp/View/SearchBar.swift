@@ -14,16 +14,25 @@ struct SearchBar: View {
     var body: some View {
       HStack {
         TextField("Search Location", text: $text, onCommit: onSearch)
-          .textFieldStyle(RoundedBorderTextFieldStyle())
-          .background(Color(.systemGray4))
-          .padding(.leading, 4)
+          .padding(.leading, 12)
+          .foregroundColor(Color("foregroundGray"))
+          .frame(height: 46)
 
         Button(action: onSearch) {
           Image(systemName: "magnifyingglass")
+            .frame(width: 9, height: 9)
+            .foregroundColor(Color(.gray))
+            .padding(.trailing, 20)
+           
         }
-        .padding(.trailing, 8)
       }
-      padding()
+      
+      .frame(width: 327, height: 46)
+      .background(Color(.systemGray6))
+      .cornerRadius(16)
+      .padding(.top, 44)
+      .padding(.leading, 24)
+
     }
 }
 

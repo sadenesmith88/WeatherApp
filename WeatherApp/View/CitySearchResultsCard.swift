@@ -13,31 +13,44 @@ struct CitySearchResultsCard: View {
   var iconURL: String
 
     var body: some View {
-      HStack(spacing: 20) {
+      print("City: \(city), Temperature: \(temperature), iconURL: \(iconURL)")
+      return HStack(spacing: 20) {
         //vstack for city name and temp
         VStack(alignment: .leading, spacing: 5) {
           Text(city)
-            .font(.headline)
+            .font(.system(size: 20))
             .fontWeight(.bold)
+            .foregroundColor(.black)
 
-          Text("\(temperature, specifier: "%.1f")°C")
-            .font(.subheadline)
-            .foregroundColor(.secondary)
+          Text("\(temperature, specifier: "%.1f")°")
+            .font(.system(size: 60))
+            .foregroundColor(.black)
         }
         Spacer()
 
-        //weather icon
-        AsyncImage(url: URL(string: iconURL)) { image in
-          image.resizable().scaledToFit()
-        } placeholder: {
-          ProgressView()
+        let validIconURL = iconURL.hasPrefix("http") ? iconURL : "https:" + iconURL
+        if let url = URL(string: validIconURL) {
+          //weather icon
+          AsyncImage(url: url) { image in
+            image
+              .resizable()
+              .scaledToFit()
+          } placeholder: {
+            ProgressView()
+          }
+          .frame(width: 60, height: 64)
+
+        } else {
+          Text("Invalid URL")
+            .font(.footnote)
+            .foregroundColor(.red)
+            .frame(width: 100, height: 100)
         }
-        .frame(width: 50, height: 50)
       }
-      .padding()
-      .background(Color(.systemGray6))
-      .cornerRadius(10)
-      .shadow(radius: 5)
+      .padding(10)
+      .background(Color("backgroundGray"))
+      .cornerRadius(16)
+
     }
 }
 

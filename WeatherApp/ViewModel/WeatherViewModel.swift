@@ -22,7 +22,7 @@ class WeatherViewModel: ObservableObject {
 
   func fetchWeather(for city: String) {
     guard !city.isEmpty else {
-      self.errorMessage = "PLease enter a valid city name"
+      self.errorMessage = "Please enter a valid city name"
       return
     }
 
@@ -45,10 +45,23 @@ class WeatherViewModel: ObservableObject {
   func searchCity(for query: String) {
     guard !query.isEmpty else { return }
 
-    //simulate search result for demonstration
-    self.searchResult = SearchResult(
-      cityName: query,
-      temperature: 20.0,
-      iconURL: "https://cdn.weatherapi.com/weather/64x64/day/113.png")
+    //fetch real weather data for searched city
+    weatherService.fetchWeather(for: query) { [weak self] result in
+      DispatchQueue.main.async {
+        switch result {
+        case .success(let weather):
+          self?.searchResult = SearchResult(
+            cityName: weather.location.name,
+            temperature: weather.current.temp_c,
+            iconURL: self?.correctURL(weather.current.condition.icon) ?? ""
+          )
+        case .failure(let error):
+          self?.errorMessage = "Error fetching weather: \(error.localizedDescription)"
+        }
+      }
+    }
+  }
+  private func correctURL(_ url: String) -> String {
+    return url.hasPrefix("http") ? url : "https:" + url
   }
 }
