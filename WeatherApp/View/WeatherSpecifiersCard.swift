@@ -17,27 +17,30 @@ struct WeatherSpecifiersCard: View {
         VStack {
           Text("Humidity")
             .font(.headline)
-            .foregroundColor(.gray)
+            .foregroundColor(Color("foregroundGray"))
           Text("\(humidity)%")
             .font(.caption)
+            .foregroundColor(Color("weatherSpec"))
             .fontWeight(.bold)
         }
 
         VStack {
           Text("UV")
             .font(.headline)
-            .foregroundColor(.gray)
+            .foregroundColor(Color("foregroundGray"))
           Text("\(uv, specifier: "%.1f")")
             .font(.caption)
+            .foregroundColor(Color("weatherSpec"))
             .fontWeight(.bold)
 
         }
         VStack {
           Text("Feels Like")
             .font(.headline)
-            .foregroundColor(.gray)
+            .foregroundColor(Color("foregroundGray"))
           Text("\(feelsLike, specifier: "%.1f")°")
             .font(.caption)
+            .foregroundColor(Color("weatherSpec"))
             .fontWeight(.bold)
         }
       }

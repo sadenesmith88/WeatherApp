@@ -38,7 +38,7 @@ struct CitySearchResultsCard: View {
           } placeholder: {
             ProgressView()
           }
-          .frame(width: 60, height: 64)
+          .frame(width: 83, height: 67)
 
         } else {
           Text("Invalid URL")

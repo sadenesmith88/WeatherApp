@@ -32,8 +32,9 @@ struct ContentView: View {
 
             HStack {
               Text(weather.location.name)
-                .font(.largeTitle)
-                .fontWeight(.bold)
+                .font(.custom("Poppins-Bold.ttf", size: 30))
+
+
 
 
               //navigate to apple maps
@@ -50,7 +51,7 @@ struct ContentView: View {
             .padding()
 
             //temperature
-            Text("\(weather.current.temp_c, specifier: "%.1f")°")
+            Text("\(weather.current.temp_f, specifier: "%.1f")°")
               .font(.system(size: 60))
               .fontWeight(.bold)
 

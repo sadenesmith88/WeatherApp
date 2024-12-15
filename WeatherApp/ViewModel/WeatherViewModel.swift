@@ -52,7 +52,7 @@ class WeatherViewModel: ObservableObject {
         case .success(let weather):
           self?.searchResult = SearchResult(
             cityName: weather.location.name,
-            temperature: weather.current.temp_c,
+            temperature: weather.current.temp_f,
             iconURL: self?.correctURL(weather.current.condition.icon) ?? ""
           )
         case .failure(let error):

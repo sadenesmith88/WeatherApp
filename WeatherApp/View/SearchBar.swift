@@ -21,14 +21,14 @@ struct SearchBar: View {
         Button(action: onSearch) {
           Image(systemName: "magnifyingglass")
             .frame(width: 9, height: 9)
-            .foregroundColor(Color(.gray))
+            .foregroundColor(Color("foregroundGray"))
             .padding(.trailing, 20)
            
         }
       }
       
       .frame(width: 327, height: 46)
-      .background(Color(.systemGray6))
+      .background(Color("backgroundGray"))
       .cornerRadius(16)
       .padding(.top, 44)
       .padding(.leading, 24)

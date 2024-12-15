@@ -34,23 +34,23 @@ struct CitySearchView: View {
         } else if viewModel.searchText.isEmpty {
           VStack {
             Text("No City Selected")
-              .font(.system(size: 30))
-              .fontWeight(.black)
+              .font(.custom("Poppins-Bold", size: 30))
+
+              .padding()
+
             Text("Please Search For A City")
-              .font(.system(size: 15))
+              .font(.custom("Poppins-Bold", size: 15))
               .foregroundColor(.black)
-              .fontWeight(.black)
+
           }
-          .padding(.top, 330)
+          .padding(.top, 60)
         }
         else {
-          Text("No results found")
-            .foregroundColor(.gray)
-            .padding()
+          Text("")
+          .padding(.top, 60)
         }
         Spacer()
       }
-
     }
   }
 }

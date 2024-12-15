@@ -21,7 +21,9 @@ struct WeatherModel: Decodable {
 
   struct Current: Decodable {
     let temp_c: Double
+    let temp_f: Double
     let feelslike_c: Double
+    let feelslike_f: Double
     let humidity: Int
     let uv: Double
     let condition: Condition
