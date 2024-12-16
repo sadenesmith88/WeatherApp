@@ -71,7 +71,7 @@ WeatherApp is a Swift-based iOS application that allows users to search for weat
    - The last searched city is saved and automatically loaded when you reopen the app.
 
 4. # Navigate to Maps
-   - Tap the city name to open its location in Apple Maps.
+   - Tap the arrow next to city name to open its location in Apple Maps.
 
 ---
 
