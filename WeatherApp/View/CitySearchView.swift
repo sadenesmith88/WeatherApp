@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUI
 
 struct CitySearchView: View {
     @ObservedObject var viewModel: WeatherViewModel
@@ -14,31 +15,46 @@ struct CitySearchView: View {
         NavigationStack {
             VStack {
                 // Search Bar
-                SearchBar(text: $viewModel.searchText, onSearch: {
-                    if !viewModel.searchText.isEmpty {
-                        viewModel.searchCity(for: viewModel.searchText)
+                SearchBar(
+                    text: $viewModel.searchText,
+                    onSearch: {
+                        if !viewModel.searchText.isEmpty {
+                            viewModel.searchCity(for: viewModel.searchText)
+                        }
                     }
-                })
+                )
                 .padding(.horizontal)
                 .padding(.top, 20)
 
-                // Check for various states
+                Spacer()
+
+                // Display states based on ViewModel properties
                 if viewModel.isLoading {
                     ProgressView("Searching...")
                         .padding()
-                } else if let errorMessage = viewModel.errorMessage {
-                    VStack {
-                        Text("No City Selected")
-                            .font(.custom("Poppins-Bold", size: 30))
-                            .padding()
+                } else if let boldMessage = viewModel.boldErrorMessage,
+                          let regularMessage = viewModel.regularErrorMessage {
+                    // Display error messages with custom formatting
+                    VStack(spacing: 8) {
+                        Text(boldMessage)
+                            .font(.custom("Poppins-Bold", size: 20))
+                            .foregroundColor(.black)
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 20)
 
-                        Text(errorMessage)
+                        Text(regularMessage)
                             .font(.custom("Poppins-Bold", size: 15))
                             .foregroundColor(.black)
+                            .multilineTextAlignment(.center)
                     }
-                    .padding(.top, 60)
+                    .padding(.top, 150)
                 } else if let searchResult = viewModel.searchResult {
-                    NavigationLink(destination: ContentView(cityName: searchResult.cityName, viewModel: viewModel)) {
+                    NavigationLink(
+                        destination: ContentView(
+                            cityName: searchResult.cityName,
+                            viewModel: viewModel
+                        )
+                    ) {
                         CitySearchResultsCard(
                             city: searchResult.cityName,
                             temperature: searchResult.temperature,
@@ -47,32 +63,51 @@ struct CitySearchView: View {
                         .padding()
                     }
                 } else if viewModel.searchText.isEmpty {
-                    VStack {
-                        Text("No City Selected")
-                            .font(.custom("Poppins-Bold", size: 30))
-                            .padding()
-
-                        Text("Please Search For A City")
-                            .font(.custom("Poppins-Bold", size: 15))
-                            .foregroundColor(.gray)
-                    }
-                    .padding(.top, 60)
+                    PlaceholderView(
+                        title: "No City Selected",
+                        message: "Please Search For A City"
+                    )
+                    .padding(.top, 150)
                 } else {
-                    VStack {
-                        Text("No results found")
-                            .font(.custom("Poppins-Regular", size: 15))
-                            .foregroundColor(.gray)
-                    }
-                    .padding(.top, 60)
+                    PlaceholderView(
+                        title: "No results found",
+                        message: nil
+                    )
+                    .padding(.top, 150)
                 }
 
                 Spacer()
             }
+            .navigationTitle("City Search")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarHidden(true) // Optional: Hide the default back button
         }
     }
+
+  // MARK: - PlaceholderView
+  struct PlaceholderView: View {
+      let title: String
+      let message: String?
+
+      var body: some View {
+          VStack(spacing: 8) {
+              Text(title)
+                  .font(.custom("Poppins-Bold", size: 30))
+                  .foregroundColor(.black)
+                  .multilineTextAlignment(.center)
+                  .padding()
+
+              if let message = message {
+                  Text(message)
+                      .font(.custom("Poppins-Regular", size: 15))
+                      .foregroundColor(.gray)
+                      .multilineTextAlignment(.center)
+              }
+          }
+      }
+  }
+
 }
-
-
 
 
 
