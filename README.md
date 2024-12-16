@@ -7,7 +7,8 @@ WeatherApp is a Swift-based iOS application that allows users to search for weat
 
 ## Features
 
-- # Search for Weather: Users can search for any city and view its weather details.
+- # Search for Weather:
+- Users can search for any city and view its weather details.
 - # Detailed Weather Information:
   - Temperature
   - Weather condition with icon
