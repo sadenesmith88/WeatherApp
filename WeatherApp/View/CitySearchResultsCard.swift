@@ -16,16 +16,23 @@ struct CitySearchResultsCard: View {
       print("City: \(city), Temperature: \(temperature), iconURL: \(iconURL)")
       return HStack(spacing: 20) {
         //vstack for city name and temp
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: 0) {
           Text(city)
-            .font(.system(size: 20))
-            .fontWeight(.bold)
+            .font(.custom("Poppins-Bold", size: 20))
             .foregroundColor(.black)
-
-          Text("\(temperature, specifier: "%.1f")°")
-            .font(.system(size: 60))
-            .foregroundColor(.black)
+            .padding(.leading, 10)
+          HStack(alignment: .center, spacing: 10) {
+            Text("\(Int(round(temperature)))")
+              .font(.custom("Poppins-Bold", size: 60))
+              .foregroundColor(.black)
+            Text("°")
+              .font(.custom("Poppins-Regular", size: 20))
+              .foregroundColor(.black)
+              .baselineOffset(25)
+          }
         }
+        .padding(.leading, 16)
+
         Spacer()
 
         let validIconURL = iconURL.hasPrefix("http") ? iconURL : "https:" + iconURL
@@ -50,6 +57,7 @@ struct CitySearchResultsCard: View {
       .padding(10)
       .background(Color("backgroundGray"))
       .cornerRadius(16)
+      .frame(maxWidth: 350)
 
     }
 }

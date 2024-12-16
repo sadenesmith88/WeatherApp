@@ -15,7 +15,7 @@ struct SearchBar: View {
       HStack {
         TextField("Search Location", text: $text, onCommit: onSearch)
           .padding(.leading, 12)
-          .foregroundColor(Color("foregroundGray"))
+          .foregroundColor(Color("searchColor"))
           .frame(height: 46)
 
         Button(action: onSearch) {
@@ -31,7 +31,7 @@ struct SearchBar: View {
       .background(Color("backgroundGray"))
       .cornerRadius(16)
       .padding(.top, 44)
-      .padding(.leading, 24)
+      .padding(.leading, 10)
 
     }
 }

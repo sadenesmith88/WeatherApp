@@ -11,7 +11,10 @@ import SwiftUI
 struct WeatherAppApp: App {
     var body: some Scene {
         WindowGroup {
-          CitySearchView(viewModel: WeatherViewModel())
+          ContentView(cityName: loadSavedCity(), viewModel: WeatherViewModel())
         }
     }
+}
+private func loadSavedCity() -> String {
+  UserDefaults.standard.string(forKey: "savedCity") ?? "DefaultCity"
 }
